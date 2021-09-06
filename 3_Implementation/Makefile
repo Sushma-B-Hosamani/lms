@@ -1,12 +1,8 @@
 SRC = main.c\
-src/add.c\
-src/search.c\
-src/list.c
+src/temp.c
 
 OBJ = main.o\
-add.o\
-search.o\
-list.o
+temp.o
 
 INC = inc
 CFLAGS = -I$(INC)
@@ -23,4 +19,3 @@ run: target
 
 clean:
 	rm all.exe *.o src/*.o
-	

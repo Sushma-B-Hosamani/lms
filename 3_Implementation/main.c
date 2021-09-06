@@ -10,6 +10,7 @@
  */
 
 
+
 #include "fun.h"
 
 char password[8]="library";
@@ -18,15 +19,6 @@ char *arr="Books.txt";
 FILE *pb;
 
 
-int main(void)
-{
-    system("cls");
-    printf("\n\n\n\t\t\t Library Management System \n\n\t\t\t\t\t\t\t\t mini project \n\t\t\t\t\t\t\t\t");
-    printf("\n Press any key to continue");
-    getch();
-    admin();
-    return 0;
-}
 
 void admin(void)
 {
@@ -73,27 +65,9 @@ void admin(void)
             case 4:exitcheck();
             break;
             default: printf("\n\n\t\t Invalid Choice");
-                     getch();
+            getch();
         }
     }while(1);
-}
-
-int bidcheck(int id)
-{
-    FILE *b;
-    int i=0;
-    b=fopen(arr,"r");
-    while(!feof(b))
-    {
-        if(fread(&bc,sizeof(struct book),1,b)==1)
-            if(bc.id==id)
-        {
-            i=1;
-            break;
-        }
-    }
-    fclose(b);
-    return i;
 }
 
 
@@ -108,3 +82,13 @@ void exitcheck(void)
     return;
 }
 
+
+int main(void)
+{
+    system("cls");
+    printf("\n\n\n\t\t\t Library Management System \n\n\t\t\t\t\t\t\t\t mini project \n\t\t\t\t\t\t\t\t");
+    printf("\n Press any key to continue");
+    getch();
+    admin();
+    return 0;
+}
