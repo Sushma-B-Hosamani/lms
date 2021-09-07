@@ -13,7 +13,7 @@ struct book
 
 extern char *arr;
 extern FILE *pb;
-
+extern char info[500];
 
 int bidcheck(int id)
 {
@@ -48,17 +48,20 @@ void addbook(void)
         if(bidcheck(b.id)==0)
         {
             printf("\n\t Book Name : ");
-            scanf(" %[^\n]s",b.name);
+            scanf(" %s",b.name);
             printf("\n\t Author : ");
-            scanf(" %[^\n]s",b.author);
+            scanf(" %s",b.author);
             printf("\n\t Number of copies :");
             scanf("%d",&b.copies);
             b.copiesleft=b.copies;
-            fwrite(&b,sizeof(struct book),1,pb);
+  
+            fprintf(pb,"\n%d\t%s\t%s\t%d\t%d\t",b.id,b.name,b.author,b.copies,b.copiesleft);
+
             printf("\n\t Book Successfully added");
             printf("\n\t Do you want to enter details of another book? (Y/N)");
             scanf(" %c",&ch);
         }
+
         else
         {
             printf("\n\t BookId already exists ");
@@ -74,54 +77,21 @@ void addbook(void)
 
 void listbook(void)
 {
-    pb=fopen(arr,"r");
+    char info[500];
+    pb=fopen(arr,"a++");
     system("cls");
     printf("\n\n\t\t Book Record");
-    printf("\n %5s %20s %20s %12s %11s","Id","Book Name","Author Name","No.of Copies","Copies Left");
+    printf("\n %s %10s %10s %5s %11s","Id","Book Name","Author Name","No.of Copies","Copies Left");
     while(!feof(pb))
     {
-        if(fread(&b,sizeof(struct book),1,pb)==1)
-        printf("\n %5d %20s %20s %12d %11d",b.id,b.name,b.author,b.copies,b.copiesleft);
+        fgets(info,500,pb);
+        printf("%5s\n",info);
     }
     fclose(pb);
     printf("\n\n\t Press any key to continue");
     getch();
     return;
 }
-
-
-void searchbook(void)
-{
-    pb=fopen(arr,"r");
-    char ch,name[20];int i;
-    do
-    {
-        system("cls");
-        i=0;
-        rewind(pb);
-        printf("\n\n\t\t\t\t Book Search ");
-        printf("\n\t Enter the name of the book to search : ");
-        scanf(" %[^\n]s",name);
-        while(!feof(pb))
-        {
-            if(fread(&b,sizeof(struct book),1,pb)==1)
-            if(strcmpi(b.name,name)==0)
-            {
-                i++;
-                printf("\n\t Search Result : %d",i);
-                printf("\n\t BookId : %d \n\t Book Name : %s \n\t Author : %s \n\t Number of copies : %d \n\t Number of copies left : %d",b.id,b.name,b.author,b.copies,b.copiesleft);
-            }
-        }
-    if(i==0)
-        printf("\n\t No such book found");
-    printf("\n Do you want to search for any other book ? (Y/N)");
-    scanf(" %c",&ch);
-    }while(ch=='Y'||ch=='y');
-    fclose(pb);
-    return;
-}
-
-
 
 
 

@@ -14,7 +14,7 @@
 #include "fun.h"
 
 char password[8]="library";
-
+char info[500];
 char *arr="Books.txt";
 FILE *pb;
 
@@ -51,7 +51,7 @@ void admin(void)
     {
         system("cls");
         printf("\n\n\t\t\t\t Book Menu");
-        printf("\n\n\t\t 1. Add Book \n\t\t 2. list Book \n\t\t 3. Search Book \n\t\t 4. Exit");
+        printf("\n\n\t\t 1. Add Book \n\t\t 2. list Book  \n\t\t  3. Exit");
         printf("\n\n\t\t Please Enter the choice : ");
         scanf("%d",&choice);
         switch(choice)
@@ -60,9 +60,8 @@ void admin(void)
             break;
             case 2:listbook();
             break;
-            case 3:searchbook();
-            break;
-            case 4:exitcheck();
+           
+            case 3:exitcheck();
             break;
             default: printf("\n\n\t\t Invalid Choice");
             getch();
